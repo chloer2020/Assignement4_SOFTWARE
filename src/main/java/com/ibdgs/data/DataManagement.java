@@ -13,11 +13,11 @@ public class DataManagement {
     private String data[];
 
     // to get the line number
-    public int getLineNumber(File inventoryFile) {
+    public int getLineNumber(File file) {
         int len = -1;
         try {
 
-            LineNumberReader lineNumberReader = new LineNumberReader(new FileReader(inventoryFile));
+            LineNumberReader lineNumberReader = new LineNumberReader(new FileReader(file));
             lineNumberReader.skip(Long.MAX_VALUE);
             len = lineNumberReader.getLineNumber();
             lineNumberReader.close();
@@ -28,13 +28,13 @@ public class DataManagement {
         return len;
     }
 
-    public void addData(int SlNo, String name, String b_price, String s_price, String qty, String data6, File newFile) { // add data to file by tab and new line ----6 data variant
+    public void addData(String driverID, String name, int experienceYears, String licenseType, String address, String birthdate, File newFile) { // add data to file by tab and new line ----6 data variant
                                                                                                            
                                                                                                            
         try {
             newFile.createNewFile();
             FileWriter writer = new FileWriter(newFile, true);
-            writer.write(SlNo + "\t" + name + "\t" + b_price + "\t" + s_price + "\t" + qty +"\t"+data6+ "\n");
+            writer.write(driverID + "\t" + name + "\t" + experienceYears + "\t" + licenseType + "\t" + address + "\t" + birthdate + "\n");
             writer.flush();
             writer.close();
         } catch (Exception e) {
@@ -42,27 +42,14 @@ public class DataManagement {
         }
     }
 
-    public void addData(int SlNo, String name, String b_price, String s_price, String qty, File newFile) { // add data to file by tab and new line ----5 data variant
-                                                                                                           
-                                                                                                           
-        try {
-            newFile.createNewFile();
-            FileWriter writer = new FileWriter(newFile, true);
-            writer.write(SlNo + "\t" + name + "\t" + b_price + "\t" + s_price + "\t" + qty + "\n");
-            writer.flush();
-            writer.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void addData(String data1, String data2, String data3, String data4, File newFile) { // add data to file by tab and new line ----- 4 data variant 
+    
+    public void addData(String busID, int capacity, double fuelLevel, String fuelType, File newFile) { // add data to file by tab and new line ----- 4 data variant 
                                                                                                 
 
         try {
             newFile.createNewFile();
             FileWriter writer = new FileWriter(newFile, true);
-            writer.write(data1 + "\t" + data2 + "\t" + data3 + "\t" + data4 + "\n");
+            writer.write(busID + "\t" + capacity + "\t" + fuelLevel + "\t" + fuelType + "\n");
             writer.flush();
             writer.close();
         } catch (Exception e) {
@@ -70,19 +57,6 @@ public class DataManagement {
         }
     }
 
-    public void addData(String data1, String data2, File newFile) { // add data to file by tab and new line) ------ 2 data variant
-                                                                 
-
-        try {
-            newFile.createNewFile();
-            FileWriter writer = new FileWriter(newFile, true);
-            writer.write(data1 + "\t" + data2 + "\n");
-            writer.flush();
-            writer.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 
     public String[] readData(File newFile, Scanner sc) { // reads data by line, has to use in a loop
 
@@ -128,7 +102,8 @@ public class DataManagement {
                 }
             }
 
-            addData(getLineNumber(tmpfile) + 1, data[1], data[2], data[3], data[4], tmpfile);
+            // Write the modified data (placeholder - actual implementation depends on data format)
+            writer.write(String.join("\t", data) + "\n");
         }
         sc.close();
         writer.close();
@@ -195,21 +170,22 @@ public class DataManagement {
             Scanner sc = new Scanner(dataFile);
             File tmpFile = new File("./tempFile.txt");
             tmpFile.createNewFile();
+            FileWriter writer = new FileWriter(tmpFile);
+            
             while (sc.hasNextLine()) {
                 data=readData(dataFile, sc);
                 if (data[1].equals(toBeDeleteData[1])) {
                     continue;
                 }
                 else{
-                    addData(getLineNumber(tmpFile)+1, data[1], data[2], data[3], data[4], tmpFile);
+                    writer.write(String.join("\t", data) + "\n");
                 }
             }
-          
             
             sc.close();
+            writer.close();
             dataFile.delete();
             tmpFile.renameTo(dataFile);
-            //tmp1.renameTo(dataFile);
         } catch (Exception e) {
             e.printStackTrace();
         }
