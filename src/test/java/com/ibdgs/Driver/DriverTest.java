@@ -4,15 +4,13 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-/**
- * Unit tests for Driver-related requirements D1 to D5.
- */
+/* Unit tests for Driver-related requirements D1 to D5.*/
 class DriverTest {
 
     private static final String ADDRESS = "12|King Street|Melbourne|VIC|Australia";
     private static final String BIRTHDATE = "15-04-1995";
 
-    // -------------------- D1: Driver ID Rules --------------------
+    //D1: Driver ID Rules
 
     @Test
     void d1ValidDriverIdShouldBeAccepted() {
@@ -48,7 +46,7 @@ class DriverTest {
         assertEquals(1, repo.count());
     }
 
-    // -------------------- D2: Address Format --------------------
+    // D2: Address Format Restrictions
 
     @Test
     void d2ValidAddressFormatShouldBeAccepted() {
@@ -70,7 +68,7 @@ class DriverTest {
         assertFalse(Driver.isValidAddress("ABC|King Street|Melbourne|VIC|Australia"));
     }
 
-    // -------------------- D3: Birthdate Format --------------------
+    //D3: Birthdate Format
 
     @Test
     void d3ValidBirthdateFormatShouldBeAccepted() {
@@ -92,7 +90,7 @@ class DriverTest {
         assertFalse(Driver.isValidBirthdate(null));
     }
 
-    // -------------------- D4: Licence Update Restriction --------------------
+    //D4: Licence Update Restrictions
 
     @Test
     void d4DriverWithMoreThanTenYearsExperienceCannotChangeLicence() {
@@ -127,7 +125,7 @@ class DriverTest {
         assertEquals("Medium", repo.retrieve("25@#abcdEF").getLicenseType());
     }
 
-    // -------------------- D5: Immutable Fields --------------------
+    // D5: Immutable Fields after updates
 
     @Test
     void d5DriverIdShouldRemainTheSameAfterUpdate() {
