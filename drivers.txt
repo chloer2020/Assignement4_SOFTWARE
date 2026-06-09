@@ -9,3 +9,4 @@
 26@#abcdGH	Experienced Driver	5	Heavy	12|King Street|Melbourne|VIC|Australia	08-06-1991
 32@#abcdOP	PT Driver	8	PublicTransport	12|King Street|Melbourne|VIC|Australia	08-06-1986
 27@#abcdIJ	Less Experienced Driver	4	Heavy	12|King Street|Melbourne|VIC|Australia	08-06-1991
+33@#wxyzWX  Demo Driver 6   Heavy   12|King Street|Melbourne|VIC|Australia  08-06-1990
