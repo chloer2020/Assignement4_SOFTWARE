@@ -1,9 +1,10 @@
 package com.ibdgs.driver;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.io.File;
+
 import com.ibdgs.data.DataManagement;
 
 public class DriverRepository {
@@ -13,6 +14,12 @@ public class DriverRepository {
         this.drivers = new ArrayList<>();
         this.dataManagement = new DataManagement();
         this.driversFile = new File("drivers.txt");
+    }
+    // constructor so test files do not replace changed txt file for driver repository
+    public DriverRepository(File file) {
+        this.drivers = new ArrayList<>();
+        this.dataManagement = new DataManagement();
+        this.driversFile = file;
     }
 
     // persistence helpers
