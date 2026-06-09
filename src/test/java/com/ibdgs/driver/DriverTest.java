@@ -15,10 +15,10 @@ class DriverTest {
     private static final String ADDRESS = "12|King Street|Melbourne|VIC|Australia";
     private static final String BIRTHDATE = "15-04-1995";
 
+    //D1: Driver ID Rules
+
     @TempDir
     Path tempDir;
-
-    //D1: Driver ID Rules
 
     @Test
     void d1ValidDriverIdShouldBeAccepted() {
@@ -48,7 +48,7 @@ class DriverTest {
     @Test
     void d1DuplicateDriverIdShouldBeRejectedByRepository() {
         DriverRepository repo = new DriverRepository(tempDir.resolve("drivers.txt").toFile());
-
+        
         assertTrue(repo.add("23@#abcdAB", "John Smith", 5, "Heavy", ADDRESS, BIRTHDATE));
         assertFalse(repo.add("23@#abcdAB", "Jane Smith", 6, "Heavy", ADDRESS, BIRTHDATE));
         assertEquals(1, repo.count());

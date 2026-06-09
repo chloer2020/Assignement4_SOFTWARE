@@ -1,9 +1,10 @@
 package com.ibdgs.bus;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.io.File;
+
 import com.ibdgs.data.DataManagement;
 
 public class BusRepository {
@@ -16,11 +17,10 @@ public class BusRepository {
     }
     // constructor so test files do not replace changed txt file
     public BusRepository(File file) {
-    this.buses = new ArrayList<>();
-    this.dataManagement = new DataManagement();
-    this.busesFile = file; 
+        this.buses = new ArrayList<>();
+        this.dataManagement = new DataManagement();
+        this.busesFile = file; 
     }
-
     // persistence helpers
     private DataManagement dataManagement;
     private File busesFile;

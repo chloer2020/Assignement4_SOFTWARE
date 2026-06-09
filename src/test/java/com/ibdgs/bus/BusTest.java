@@ -3,11 +3,10 @@ package com.ibdgs.bus;
 import com.ibdgs.driver.DriverRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
-
 import java.nio.file.Path;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.io.File;
+import java.time.format.DateTimeFormatter;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -23,7 +22,6 @@ class BusTest {
 
     @TempDir
     Path tempDir;
-
     //B1: Bus ID Rules
 
     @Test

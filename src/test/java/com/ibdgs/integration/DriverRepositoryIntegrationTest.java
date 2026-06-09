@@ -4,7 +4,6 @@ import com.ibdgs.driver.Driver;
 import com.ibdgs.driver.DriverRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
-
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -25,7 +24,7 @@ class DriverRepositoryIntegrationTest {
     @Test
     void validDriverIsStoredCorrectlyUsingRealTxtFile() throws IOException {
         File tempFile = tempDir.resolve("drivers.txt").toFile();
-        DriverRepository repo = new DriverRepository();
+        DriverRepository repo = new DriverRepository(tempFile);
         Path driverFile = tempDir.resolve("drivers.txt");
 
         assertTrue(repo.add("23@#abcdAB", "John Smith", 5, "Heavy", ADDRESS, BIRTHDATE));
