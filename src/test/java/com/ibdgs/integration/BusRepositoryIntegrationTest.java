@@ -5,6 +5,7 @@ import com.ibdgs.bus.BusRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -21,7 +22,8 @@ class BusRepositoryIntegrationTest {
 
     @Test
     void validBusIsStoredCorrectlyUsingRealTxtFile() throws IOException {
-        BusRepository repo = new BusRepository();
+        File tempFile = tempDir.resolve("buses.txt").toFile();
+        BusRepository repo = new BusRepository(tempFile);
         Path busFile = tempDir.resolve("buses.txt");
 
         assertTrue(repo.add("12345678", 45, 80.5, "Diesel"));
@@ -38,7 +40,8 @@ class BusRepositoryIntegrationTest {
 
     @Test
     void invalidBusIsRejectedAndNotStoredInTxtFile() throws IOException {
-        BusRepository repo = new BusRepository();
+        File tempFile = tempDir.resolve("buses.txt").toFile();
+        BusRepository repo = new BusRepository(tempFile);
         Path busFile = tempDir.resolve("buses.txt");
 
         assertFalse(repo.add("1234ABCD", 45, 80.5, "Diesel"));
@@ -50,7 +53,8 @@ class BusRepositoryIntegrationTest {
 
     @Test
     void busUpdateIsPersistedCorrectlyUsingRealTxtFile() throws IOException {
-        BusRepository repo = new BusRepository();
+        File tempFile = tempDir.resolve("buses.txt").toFile();
+        BusRepository repo = new BusRepository(tempFile);
         Path busFile = tempDir.resolve("buses.txt");
 
         assertTrue(repo.add("11111111", 60, 90.0, "Hybrid"));
@@ -67,7 +71,8 @@ class BusRepositoryIntegrationTest {
 
     @Test
     void busRecordCountIsUpdatedCorrectlyUsingRealTxtFile() throws IOException {
-        BusRepository repo = new BusRepository();
+        File tempFile = tempDir.resolve("buses.txt").toFile();
+        BusRepository repo = new BusRepository(tempFile);
         Path countFile = tempDir.resolve("bus-count.txt");
 
         assertTrue(repo.add("22222222", 40, 75.0, "Diesel"));

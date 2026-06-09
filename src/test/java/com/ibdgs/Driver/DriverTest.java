@@ -3,12 +3,20 @@ package com.ibdgs.driver;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
+import java.io.File;
+
+import java.nio.file.Path;
+
+import org.junit.jupiter.api.io.TempDir;
 
 /* Unit tests for Driver-related requirements D1 to D5.*/
 class DriverTest {
 
     private static final String ADDRESS = "12|King Street|Melbourne|VIC|Australia";
     private static final String BIRTHDATE = "15-04-1995";
+
+    @TempDir
+    Path tempDir;
 
     //D1: Driver ID Rules
 
@@ -39,7 +47,7 @@ class DriverTest {
 
     @Test
     void d1DuplicateDriverIdShouldBeRejectedByRepository() {
-        DriverRepository repo = new DriverRepository();
+        DriverRepository repo = new DriverRepository(tempDir.resolve("drivers.txt").toFile());
 
         assertTrue(repo.add("23@#abcdAB", "John Smith", 5, "Heavy", ADDRESS, BIRTHDATE));
         assertFalse(repo.add("23@#abcdAB", "Jane Smith", 6, "Heavy", ADDRESS, BIRTHDATE));
@@ -94,7 +102,7 @@ class DriverTest {
 
     @Test
     void d4DriverWithMoreThanTenYearsExperienceCannotChangeLicence() {
-        DriverRepository repo = new DriverRepository();
+        DriverRepository repo = new DriverRepository(tempDir.resolve("drivers.txt").toFile());
         repo.add("23@#abcdAB", "John Smith", 11, "Heavy", ADDRESS, BIRTHDATE);
 
         boolean updated = repo.update("23@#abcdAB", 11, "PublicTransport", ADDRESS);
@@ -105,7 +113,7 @@ class DriverTest {
 
     @Test
     void d4DriverWithExactlyTenYearsExperienceCanChangeLicence() {
-        DriverRepository repo = new DriverRepository();
+        DriverRepository repo = new DriverRepository(tempDir.resolve("drivers.txt").toFile());
         repo.add("24@#abcdCD", "Jane Smith", 10, "Medium", ADDRESS, BIRTHDATE);
 
         boolean updated = repo.update("24@#abcdCD", 10, "Heavy", ADDRESS);
@@ -116,7 +124,7 @@ class DriverTest {
 
     @Test
     void d4DriverWithLessThanTenYearsExperienceCanChangeLicence() {
-        DriverRepository repo = new DriverRepository();
+        DriverRepository repo = new DriverRepository(tempDir.resolve("drivers.txt").toFile());
         repo.add("25@#abcdEF", "Sam Brown", 3, "Light", ADDRESS, BIRTHDATE);
 
         boolean updated = repo.update("25@#abcdEF", 3, "Medium", ADDRESS);
@@ -129,7 +137,7 @@ class DriverTest {
 
     @Test
     void d5DriverIdShouldRemainTheSameAfterUpdate() {
-        DriverRepository repo = new DriverRepository();
+        DriverRepository repo = new DriverRepository(tempDir.resolve("drivers.txt").toFile());
         repo.add("26@#abcdGH", "Alex Green", 4, "Light", ADDRESS, BIRTHDATE);
 
         String newAddress = "99|Collins Street|Melbourne|VIC|Australia";
@@ -142,7 +150,7 @@ class DriverTest {
 
     @Test
     void d5DriverNameShouldRemainTheSameAfterUpdate() {
-        DriverRepository repo = new DriverRepository();
+        DriverRepository repo = new DriverRepository(tempDir.resolve("drivers.txt").toFile());
         repo.add("27@#abcdIJ", "Chris White", 2, "Light", ADDRESS, BIRTHDATE);
 
         String newAddress = "50|Queen Street|Melbourne|VIC|Australia";

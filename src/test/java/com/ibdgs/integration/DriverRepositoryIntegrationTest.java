@@ -5,6 +5,7 @@ import com.ibdgs.driver.DriverRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -23,6 +24,7 @@ class DriverRepositoryIntegrationTest {
 
     @Test
     void validDriverIsStoredCorrectlyUsingRealTxtFile() throws IOException {
+        File tempFile = tempDir.resolve("drivers.txt").toFile();
         DriverRepository repo = new DriverRepository();
         Path driverFile = tempDir.resolve("drivers.txt");
 
@@ -40,7 +42,8 @@ class DriverRepositoryIntegrationTest {
 
     @Test
     void invalidDriverIsRejectedAndNotStoredInTxtFile() throws IOException {
-        DriverRepository repo = new DriverRepository();
+        File tempFile = tempDir.resolve("drivers.txt").toFile();
+        DriverRepository repo = new DriverRepository(tempFile);
         Path driverFile = tempDir.resolve("drivers.txt");
 
         assertFalse(repo.add("10@#abcdAB", "Invalid Driver", 5, "Heavy", ADDRESS, BIRTHDATE));
@@ -52,7 +55,8 @@ class DriverRepositoryIntegrationTest {
 
     @Test
     void driverUpdateIsPersistedCorrectlyUsingRealTxtFile() throws IOException {
-        DriverRepository repo = new DriverRepository();
+        File tempFile = tempDir.resolve("drivers.txt").toFile();
+        DriverRepository repo = new DriverRepository(tempFile);
         Path driverFile = tempDir.resolve("drivers.txt");
         String newAddress = "99|Collins Street|Melbourne|VIC|Australia";
 
@@ -70,7 +74,8 @@ class DriverRepositoryIntegrationTest {
 
     @Test
     void driverRecordCountIsUpdatedCorrectlyUsingRealTxtFile() throws IOException {
-        DriverRepository repo = new DriverRepository();
+        File tempFile = tempDir.resolve("drivers.txt").toFile();
+        DriverRepository repo = new DriverRepository(tempFile);
         Path countFile = tempDir.resolve("driver-count.txt");
 
         assertTrue(repo.add("25@#abcdEF", "Sam Brown", 3, "Light", ADDRESS, BIRTHDATE));

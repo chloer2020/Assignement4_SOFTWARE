@@ -14,6 +14,12 @@ public class DriverRepository {
         this.dataManagement = new DataManagement();
         this.driversFile = new File("drivers.txt");
     }
+    // constructor so test files do not replace changed txt file for driver repository
+    public DriverRepository(File file) {
+    this.drivers = new ArrayList<>();
+    this.dataManagement = new DataManagement();
+    this.driversFile = file;
+    }
 
     // persistence helpers
     private DataManagement dataManagement;
