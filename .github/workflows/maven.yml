@@ -1,0 +1,48 @@
+
+#    File: maven.yml
+#    Author: Chloe Rifici
+#    Student ID: s3908700
+#    Unit: ISYS1118
+#    Purpose: Maven workflow for building and testing the Intelligent Bus Driver Guidance System.
+#   Reference: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-java-with-maven
+#    Requires: - A Java project with a pom.xml configured for JUnit testing.
+#    Last Modified: 2026-06-9
+
+
+name: Java CI with Maven
+
+# Trigger the workflow automatically on every push or pull request to any branch
+on:
+  push:
+  pull_request:
+
+jobs:
+  build-and-test:
+    name: Build and run JUnit tests
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Checkout the repository so the workflow can access the code
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # 2. Set up the Java environment (JDK 17, matching pom.xml compiler target)
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+          cache: maven   # caches Maven dependencies between runs to speed up builds
+
+      # 3 & 4. Install dependencies and build the project (skip tests in this step)
+      - name: Build project
+        run: mvn -B clean compile
+
+      # 5. Execute all JUnit tests
+      - name: Run JUnit tests
+        run: mvn -B test
+
+      # 6. Display a successful build status message
+      - name: Build status
+        if: success()
+        run: echo "Build succeeded and all JUnit tests passed."
