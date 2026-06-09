@@ -1,1 +1,11 @@
 24@#abcdCD	Jane Smith	7	Heavy	99|Collins Street|Melbourne|VIC|Australia	15-04-1995
+24@#abcdCD	Fifty Driver	20	Heavy	12|King Street|Melbourne|VIC|Australia	08-06-1976
+29@#abcdMN	Heavy Driver	8	Heavy	12|King Street|Melbourne|VIC|Australia	08-06-1986
+28@#abcdKL	New Driver	0	Heavy	12|King Street|Melbourne|VIC|Australia	08-06-1996
+35@#abcdST	Medium Driver	8	Medium	12|King Street|Melbourne|VIC|Australia	08-06-1986
+23@#abcdAB	Older Driver	20	Heavy	12|King Street|Melbourne|VIC|Australia	08-06-1975
+25@#abcdEF	Older Small Bus Driver	20	Heavy	12|King Street|Melbourne|VIC|Australia	08-06-1971
+34@#abcdQR	Light Driver	8	Light	12|King Street|Melbourne|VIC|Australia	08-06-1986
+26@#abcdGH	Experienced Driver	5	Heavy	12|King Street|Melbourne|VIC|Australia	08-06-1991
+32@#abcdOP	PT Driver	8	PublicTransport	12|King Street|Melbourne|VIC|Australia	08-06-1986
+27@#abcdIJ	Less Experienced Driver	4	Heavy	12|King Street|Melbourne|VIC|Australia	08-06-1991
